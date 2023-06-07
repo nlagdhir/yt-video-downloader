@@ -1,7 +1,9 @@
 import React from "react";
 
 const Footer = () => {
- 
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+
   return (
     <div className="py-5 bg-black mt-10 text-white flex justify-center">
       <div>
