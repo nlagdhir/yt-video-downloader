@@ -2,7 +2,14 @@ import React, { useState } from "react";
 import { saveAs } from "file-saver";
 
 function Result({ data }) {
+  const videoUrl = data?.data?.videoUrl;
+  const formateData = data?.data?.formateData.info.filter(
+    (f) => f.hasAudio === true
+  );
  
+
+  // const baseUrl = process.env.REACT_APP_BASE_URL;
+  const baseUrl = "http://localhost:4000";
 
   return (
     <div className="flex justify-center mt-8 mx-2">
