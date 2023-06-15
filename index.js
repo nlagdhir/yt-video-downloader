@@ -40,6 +40,10 @@ app.post("/api/get-info", async (req, res) => {
     res.status(500).send({ error: "Failed to process the video URL" });
   }
 });
+app.get("/download", async (req, res) => {
+  const videoUrl = req.query.url;
+ 
+});
 
 const port = 4000;
 app.get("/", (req, res) => res.send("Hello World!"));
