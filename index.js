@@ -42,7 +42,22 @@ app.post("/api/get-info", async (req, res) => {
 });
 app.get("/download", async (req, res) => {
   const videoUrl = req.query.url;
- 
+  try {
+    const info = await ytdl.getInfo(videoUrl);
+    const videoFormat = ytdl.chooseFormat(info.formats, {
+      hasVideo: true,
+      hasAudio: true,
+    });
+    const filename = info.videoDetails.title;
+    const result = filename.replace(/[^a-zA-Z\s]/g, "");
+    res.header(
+      "Content-Disposition",
+      `attachment; filename="${encodeURIComponent(result)}.mp4"`
+    );
+    ytdl(videoUrl, { format: videoFormat }).pipe(res);
+  } catch (error) {
+    res.status(400).send({ error: "Invalid video URL" });
+  }
 });
 
 const port = 4000;
