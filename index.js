@@ -40,6 +40,12 @@ app.post("/api/get-info", async (req, res) => {
     res.status(500).send({ error: "Failed to process the video URL" });
   }
 });
+
+const optsByFormat = new Map([
+  // maps container to ytdl-core `ytdl` options
+  // ["mp3", { format: "mp3", quality: "highestaudio", filter: "audioonly" }],
+  ["mp4", { format: "mp4", quality: "highest" }],
+]);
 app.get("/download", async (req, res) => {
   const videoUrl = req.query.url;
   try {
@@ -48,13 +54,16 @@ app.get("/download", async (req, res) => {
       hasVideo: true,
       hasAudio: true,
     });
+    // const format = "mp4";
     const filename = info.videoDetails.title;
     const result = filename.replace(/[^a-zA-Z\s]/g, "");
     res.header(
       "Content-Disposition",
       `attachment; filename="${encodeURIComponent(result)}.mp4"`
     );
-    ytdl(videoUrl, { format: videoFormat }).pipe(res);
+    // res.send(ytdl(url, optsByFormat.get(format)));
+    res.send(ytdl(videoUrl, { format: videoFormat }));
+    // ytdl(videoUrl, { format: videoFormat }).pipe(res);
   } catch (error) {
     res.status(400).send({ error: "Invalid video URL" });
   }
