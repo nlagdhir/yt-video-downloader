@@ -41,11 +41,7 @@ app.post("/api/get-info", async (req, res) => {
   }
 });
 
-const optsByFormat = new Map([
-  // maps container to ytdl-core `ytdl` options
-  // ["mp3", { format: "mp3", quality: "highestaudio", filter: "audioonly" }],
-  ["mp4", { format: "mp4", quality: "highest" }],
-]);
+//
 app.get("/download", async (req, res) => {
   const videoUrl = req.query.url;
   try {
@@ -61,10 +57,9 @@ app.get("/download", async (req, res) => {
       "Content-Disposition",
       `attachment; filename="${encodeURIComponent(result)}.mp4"`
     );
-    // res.send(ytdl(url, optsByFormat.get(format)));
-    res.send(ytdl(videoUrl, { format: videoFormat }));
-    // ytdl(videoUrl, { format: videoFormat }).pipe(res);
+    ytdl(videoUrl, { format: videoFormat }).pipe(res).sendDate;
   } catch (error) {
+    console.log(error);
     res.status(400).send({ error: "Invalid video URL" });
   }
 });
