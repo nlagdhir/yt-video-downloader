@@ -32,7 +32,7 @@ function Result({ data }) {
           </p>
 
           <form action="GET" className="flex justify-center md:block my-4">
-            <a 
+            <a
               href={`${baseUrl}/download?url=${videoUrl}`}
               download
               className="bg-green-500 hover:bg-green-600 px-2 py-1  font-serif rounded-md text-white"
