@@ -42,6 +42,4 @@ Open your terminal and enter the command -
 
 ## Screenshots
 
-![App Screenshot](https://i.ibb.co/9cqL3QG/ymp4-vercel-app.png)
-
-
+![ymp4-vercel-app](https://github.com/nlagdhir/yt-video-downloader/assets/17096384/1857a77f-c0c4-40a1-a57b-6155a7365683)
